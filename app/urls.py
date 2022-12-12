@@ -28,5 +28,7 @@ urlpatterns = [
 
     path('borrowers/', borrowers.index, name="borrowers_index"),
     path('borrowers/edit/<int:id>', borrowers.edit, name='borrowers_edit'),
-    path('borrowers/delete/<int:id>', borrowers.delete, name='borrowers_delete')
+    path('borrowers/delete/<int:id>', borrowers.delete, name='borrowers_delete'),
+    path('borrowers/add', borrowers.add, name='borrowers_add'),
+    path('borrowers/store',borrowers.store,name='borrowers_store'),
 ]
