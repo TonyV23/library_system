@@ -21,8 +21,8 @@ def edit(request, id) :
         if id == 0 :
             form = BorrowerForm()
         else :
-            authors = Borrower.objects.get(pk = id)
-            form = BorrowerForm(instance = authors)
+            borrowers = Borrower.objects.get(pk = id)
+            form = BorrowerForm(instance = borrowers)
         return render(
             request,
             'app/borrowers/edit.html',
@@ -34,17 +34,38 @@ def edit(request, id) :
         if id == 0 :
             form = BorrowerForm(request.POST)
         else :
-            authors = Borrower.objects.get(pk = id)
-            form = BorrowerForm(request.POST, instance = authors)
+            borrowers = Borrower.objects.get(pk = id)
+            form = BorrowerForm(request.POST, instance = borrowers)
         if form.is_valid():
             form.save()
-            messages.success(request,"Author has been modified successfully !")
-        return redirect('/borrowers')
+            messages.success(request,"Borrower has been modified successfully !")
+        return redirect('borrowers/')
 
 
 def delete(request, id):
-    authors = Borrower.objects.get(pk = id)
-    authors.delete()
-    print('deleted borrower...')
+    borrowers = Borrower.objects.get(pk = id)
+    borrowers.delete()
     messages.success(request,"Borrower has been deletedd successfully !")
     return redirect('/borrowers')
+
+
+def add(request):
+    assert isinstance(request, HttpRequest)
+    if request.method == 'GET' :
+        form = BorrowerForm
+    return render(
+        request,
+        'app/borrowers/add.html',
+        {
+            'form' : form
+        }
+    )
+
+
+def store(request):
+    if request.method == 'POST':
+        form = BorrowerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Borrower has been saved successfully !")
+        return redirect('/borrowers')
