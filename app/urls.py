@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 from app.views import home, authors, borrowers, categories, book
+from app.views import home, authors, borrowers, book, categories
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -25,7 +26,6 @@ urlpatterns = [
     path('authors/store',authors.store,name='authors_store'),
     path('authors/edit/<int:id>',authors.edit,name='authors_edit'),
     path('authors/delete/<int:id>',authors.delete,name='authors_delete'),
-
     
     path('categories/', categories.index, name='categories_index'),
     path('categories/add', categories.add, name='categories_add'),
