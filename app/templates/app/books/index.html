@@ -1,0 +1,61 @@
+{% extends 'app/layouts/default.html' %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Books</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a href="{% url 'books_create' %}" class="btn btn-primary">New</a>
+        </div>
+        <div class="card-body">
+            {% if messages %}
+            {% for message in messages %}
+            <p class="alert alert-success w-100 h-100">{{ message }} </p>
+            {% endfor %}
+            {% endif %}
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Book Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Edition Date</th>
+                            <th>Book Language</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+                        <tr>
+                            <td>{{ book.id }}</td>
+                            <td>{{ book.book_title }}</td>
+                            <td>{{ book.author.first_name }}</td>
+                            <td>{{ book.edition_date }}</td>
+                            <td>{{ book.book_language }}</td>
+                            <td>
+                                <a href="{% url 'books_edit' book.id %}" class="btn btn-primary">Edit</a>
+
+                                <form action="{% url 'books_delete' book.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('Do you want really to delete this book ?')"
+                                        class="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+{% endblock %}
