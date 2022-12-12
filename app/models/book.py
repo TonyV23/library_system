@@ -6,7 +6,7 @@ class Book(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     book_title = models.CharField(max_length=30)
     book_language = models.CharField(max_length=10)
-    edition_data = models.DateField(auto_created=False, auto_now=False)
+    edition_date = models.DateField(auto_created=False, auto_now=False)
     
 
     def __str__(self) -> str:
