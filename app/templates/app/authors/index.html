@@ -1,0 +1,90 @@
+{% extends 'app/layouts/default.html' %} {% block content %}
+<!-- Begin Page Content -->
+<div class="row justify-content-center h-100">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Authors</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <a href="{% url 'authors_add' %}" class="btn btn-primary"
+        >Add new</a
+      >
+    </div>
+    <div class="card-body">
+      {% comment %} {% if messages %}
+       {% for message in messages %} 
+       <p class="alert alert-success w-100 h-100">{{ message }} </p>
+       {% endfor %}
+      {% endif %} {% endcomment %}
+
+      {% if messages %}
+       {% for message in messages %} 
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-alert mr-1"></i>{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th> Gender </th>
+              <th> Nationality </th>
+              <th> EDIT </th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for author in authors %}
+            <tr>
+              <td>{{ author.id }}</td>
+              <td>{{ author.first_name }}</td>
+              <td>{{ author.last_name }}</td>
+              <td>{{ author.gender }}</td>
+              <td>{{ author.nationality }}</td>
+              <td>
+                <a
+                  href="{% url 'authors_edit' author.id %}"
+                  class="btn btn-primary"
+                  >Edit</a
+                >
+                </td>
+
+                <td>
+                <form
+                  action="{% url 'authors_delete' author.id %}"
+                  method="post"
+                >
+                  {% csrf_token %}
+                  <button
+                    type="submit"
+                    onclick="return confirm('Do you want really to delete this author ?')"
+                    class="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.container-fluid -->
+{% endblock %}
