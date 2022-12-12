@@ -14,30 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from app.views import home, categories, authors, book
-
+from app.views import home, authors, borrowers
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', authors.index,name='home'),
-
+    path('',home.index,name='home'),
     path('authors/',authors.index,name='authors_index'),
     path('authors/add',authors.add,name='authors_add'),
     path('authors/store',authors.store,name='authors_store'),
     path('authors/edit/<int:id>',authors.edit,name='authors_edit'),
     path('authors/delete/<int:id>',authors.delete,name='authors_delete'),
 
-    path('', categories.index, name='home'),
-    path('categories/', categories.index, name='categories_index'),
-    path('categories/create', categories.add, name='categories_add'),
-    path('categories/store', categories.store, name='categories_store'),
-    path('categories/edit/<int:id>', categories.edit, name='categories_edit'),
-    path('categories/delete/<int:id>', categories.delete, name='categories_delete'),
 
-
-    path('books/', book.index, name='books_index'),
-    path('books/add', book.add, name='books_add'),
-    path('books/store', book.store, name='books_store'),
-    path('books/edit/<int:id>', book.edit, name='books_edit'),
-    path('books/delete/<int:id>', book.delete, name='books_delete'),
+    path('borrowers/', borrowers.index, name="borrowers_index"),
+    path('borrowers/edit/<int:id>', borrowers.edit, name='borrowers_edit'),
+    path('borrowers/delete/<int:id>', borrowers.delete, name='borrowers_delete'),
+    path('borrowers/add', borrowers.add, name='borrowers_add'),
+    path('borrowers/store',borrowers.store,name='borrowers_store'),
 ]
