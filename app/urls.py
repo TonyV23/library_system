@@ -19,7 +19,7 @@ from app.views import home,categories
 from app import views
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+
     path('', views.home.index, name='home'),
     path('categories/', views.categories.index, name='categories_index'),
     path('categories/create', views.categories.add, name='categories_add'),
