@@ -17,7 +17,7 @@ from django.urls import path
 from app.views import home,book
 
 urlpatterns = [
-
+    path ('', home.index, name ='home'),
     path('books/', book.index, name='books_index'),
     path('books/add', book.add, name='books_add'),
     path('books/store', book.store, name='books_store'),
