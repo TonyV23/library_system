@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-DATE_INPUT_FORMATS = ['%Y-%m-%d']
+DATE_INPUT_FORMATS = ["%Y-%m-%d"]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
