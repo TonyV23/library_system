@@ -1,0 +1,50 @@
+{% extends 'app/layouts/default.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<!-- Begin Page Content -->
+<div class="row justify-content-center h-100">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Borrows</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">New Borrow</h6>
+        </div>
+        <div class="card-body">
+                <div class="container">
+                    <form action="{% url 'borrows_store' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="form-group">
+                                {{ form.borrower|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                <label>Categories</label>
+                                <Select name='category' id="category_id" class='form-control'>
+                                    <option value="">--------</option>
+                                    {% for cat in categories %}
+                                    <option value="{{cat.id}}">{{cat.category_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form.book|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.borrow_starting_date|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.borrow_ending_date|as_crispy_field }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+{% endblock %}
