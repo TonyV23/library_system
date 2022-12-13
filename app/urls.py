@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.urls import path
 from app.views import home, authors, borrowers, categories, book
-from app.views import home, authors, borrowers, book, categories
+
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('',home.index,name='home'),
+    path ('', home.index, name ='home'),
 
     path('authors/',authors.index,name='authors_index'),
     path('authors/add',authors.add,name='authors_add'),
