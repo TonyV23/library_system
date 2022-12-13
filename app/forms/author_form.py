@@ -1,8 +1,8 @@
 from django.forms import ModelForm
-from app.models import Book
+from app.models import Author
 
-class BookForm(ModelForm):
+class AuthorForm(ModelForm):
     
     class Meta:
-        model = Book
+        model = Author
         fields = '__all__'

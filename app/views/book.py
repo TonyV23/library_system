@@ -31,7 +31,7 @@ def store(request):
         form = BookForm(request.POST)
         if form.is_valid():
             form.save()
-        messages.success(request, "Book has been saved successfully !")
+            messages.success(request,"Book has been saved successfully !")
         return redirect('/books')
     
 def edit(request, id):

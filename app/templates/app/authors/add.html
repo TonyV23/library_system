@@ -5,31 +5,28 @@
 <div class="row justify-content-center h-100">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Books</h1>
+    <h1 class="h3 mb-2 text-gray-800">Authors</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">New Book</h6>
+            <h6 class="m-0 font-weight-bold text-primary">New Author</h6>
         </div>
         <div class="card-body">
                 <div class="container">
-                    <form action="{% url 'books_store' %}" method="post">
+                    <form action="{% url 'authors_store' %}" method="post">
                         {% csrf_token %}
                         <div class="form-group">
-                            {{ form.author|as_crispy_field }}
+                            {{ form.first_name|as_crispy_field }}
                         </div>
                         <div class="form-group">
-                            {{ form.category|as_crispy_field }}
+                            {{ form.last_name|as_crispy_field }}
                         </div>
                         <div class="form-group">
-                            {{ form.book_title|as_crispy_field }}
+                            {{ form.gender|as_crispy_field }}
                         </div>
                         <div class="form-group">
-                            {{ form.book_language|as_crispy_field }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.edition_date|as_crispy_field }}
+                            {{ form.nationality|as_crispy_field }}
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
