@@ -10,4 +10,4 @@ class Book(models.Model):
     
 
     def __str__(self) -> str:
-        return self.author+ " " +self.category+ " " +self.book_title
+        return self.book_title + " by " + self.author.first_name
