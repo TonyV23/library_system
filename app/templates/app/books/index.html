@@ -40,10 +40,10 @@
             <tr>
               <th>Id</th>
               <th>Title</th>
+              <th>Language</th>
+              <th>Edition date</th>
               <th>Author</th>
               <th>Category</th>
-              <th>Edition date</th>
-              <th>Language</th>
               <th>EDIT </th>
               <th>DELETE</th>
             </tr>
@@ -53,10 +53,10 @@
             <tr>
               <td>{{ book.id }}</td>
               <td>{{ book.book_title }}</td>
+              <td>{{ book.book_language }}</td>
+              <td>{{ book.edition_date }}</td>
               <td>{{ book.author.first_name }}</td>
               <td>{{ book.category.category_name }}</td>
-              <td>{{ book.edition_date }}</td>
-              <td>{{ book.book_language }}</td>
               <td>
                 <a
                   href="{% url 'books_edit' book.id %}"
