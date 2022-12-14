@@ -64,5 +64,5 @@ def edit(request, id) :
 def delete(request, id):
     authors = Author.objects.get(pk = id)
     authors.delete()
-    messages.success(request,"Author has been deletedd successfully !")
+    messages.success(request,"Author has been deleted successfully !")
     return redirect('/authors')

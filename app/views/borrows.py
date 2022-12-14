@@ -35,6 +35,8 @@ def store(request):
         if form.is_valid():
             form.save()
             messages.success(request," Borrow has been saved successfully ! ")
+        else:
+            messages.success(request,form.errors)
         return redirect('/borrows')
 
 def edit(request, id):
