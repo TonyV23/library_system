@@ -43,7 +43,7 @@
               <th> Book Title </th>
               <th> Category </th>
               <th> Starting Date </th>
-              <th> Eding Date </th>
+              <th> Ending Date </th>
               <th> EDIT </th>
               <th>DELETE</th>
             </tr>
@@ -52,14 +52,14 @@
             {% for borrow in borrows %}
             <tr>
               <td>{{ borrow.id }}</td>
-              <td>{{ order.borrower.first_name}} {{ order.borrower.last_name}}</td>
+              <td>{{ borrow.borrower.first_name}} {{ borrow.borrower.last_name}}</td>
               <td>{{ borrow.book.book_title}}</td>
               <td>{{ borrow.book.category.category_name }}</td>
               <td>{{ borrow.borrow_starting_date }}</td>
               <td>{{ borrow.borrow_ending_date }}</td>
               <td>
                 <a
-                  href="{% url 'borrows_edit' author.id %}"
+                  href="{% url 'borrows_edit' borrow.id %}"
                   class="btn btn-primary"
                   >Edit</a
                 >
