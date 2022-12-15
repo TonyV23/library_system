@@ -12,7 +12,7 @@ def index(request):
         request,
         'app/borrows/index.html',
         {
-            'Borrows': Borrows
+            'borrows': Borrows
         }
     )
 
