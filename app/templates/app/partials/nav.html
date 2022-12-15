@@ -41,7 +41,7 @@
         <div class="header-right">
             <ul class="clearfix">
                 <li class="icons dropdown d-none d-md-flex">
-                    <h5></h5>
+                    <h5>{{user.username}}</h5>
                 </li>
                 <li class="icons dropdown">
                     <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
@@ -51,7 +51,7 @@
                     <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                         <div class="dropdown-content-body">
                             <ul>
-                                <li><a href="#"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                <li><a href="{% url 'logout' %}"><i class="icon-key"></i> <span>Logout</span></a></li>
                             </ul>
                         </div>
                     </div>
