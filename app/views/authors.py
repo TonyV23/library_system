@@ -35,30 +35,33 @@ def store(request):
             messages.success(request,"Author has been saved successfully !")
         return redirect('/authors')
 
-def edit(request, id) :
+
+def edit(request, id):
     assert isinstance(request, HttpRequest)
     if request.method == 'GET':
-        if id == 0 :
+        if id == 0:
             form = AuthorForm()
-        else :
-            authors = Author.objects.get(pk = id)
-            form = AuthorForm(instance = authors)
+        else:
+            author = Author.objects.get(pk=id)
+            form = AuthorForm(instance=author)
         return render(
             request,
             'app/authors/edit.html',
             {
-                'form' : form
+                'form': form
             }
-            )
-    else:
-        if id == 0 :
+        )
+
+def update(request, id):
+    if request.method == 'POST':
+        if id == 0:
             form = AuthorForm(request.POST)
-        else :
-            authors = Author.objects.get(pk = id)
-            form = AuthorForm(request.POST, instance = authors)
+        else:
+            author = Author.objects.get(pk=id)
+            form = AuthorForm(request.POST, instance=author)
         if form.is_valid():
             form.save()
-            messages.success(request,"Author has been modified successfully !")
+        messages.success(request, "Author has been updated successfully !")
         return redirect('/authors')
 
 def delete(request, id):

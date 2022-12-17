@@ -24,7 +24,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- Vertical Form -->
-                                <form action="" method="post">
+                                <form action="{% url 'books_update' form.instance.pk %}" method="post">
                                     {% csrf_token %}
                                   <div class="col-12">
                                     {{ form.book_title|as_crispy_field }}

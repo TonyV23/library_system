@@ -34,9 +34,22 @@ def store(request):
         messages.success(request, "Category has been saved successfully !")
         return redirect('/categories')
     
+
+def update(request, id):
+    if request.method == 'POST':
+        if id == 0:
+            form = CategoryForm(request.POST)
+        else:
+            category = Category.objects.get(pk=id)
+            form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+        messages.success(request, "Category has been updated successfully !")
+        return redirect('/categories')
+
 def edit(request, id):
     assert isinstance(request, HttpRequest)
-    if request.method == "GET":
+    if request.method == 'GET':
         if id == 0:
             form = CategoryForm()
         else:
@@ -49,17 +62,8 @@ def edit(request, id):
                 'form': form
             }
         )
-    else:
-        if id == 0:
-            form = CategoryForm(request.POST)
-        else:
-            category = Category.objects.get(pk=id)
-            form = CategoryForm(request.POST, instance=category)
-        if form.is_valid():
-            form.save()
-        messages.success(request, "Category has been updated successfully !")
-        return redirect('/categories')
-    
+
+
 def delete(request, id):
     category = Category.objects.get(pk=id)
     category.delete()
