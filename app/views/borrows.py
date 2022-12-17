@@ -39,32 +39,34 @@ def store(request):
             messages.success(request,form.errors)
         return redirect('/borrows')
 
+def update(request, id):
+    if request.method == 'POST':
+        if id == 0:
+            form = BorrowForm(request.POST)
+        else:
+            borrow = Borrow.objects.get(pk=id)
+            form = BorrowForm(request.POST, instance=borrow)
+        if form.is_valid():
+            form.save()
+        messages.success(request, "Borrow has been updated successfully !")
+        return redirect('/borrows')
+
 def edit(request, id):
     assert isinstance(request, HttpRequest)
-    if request.method == "GET":
+    if request.method == 'GET':
         if id == 0:
             form = BorrowForm()
         else:
-            Borrows = Borrow.objects.get(pk = id)
-            form = BorrowForm(instance = Borrows)
+            borrow = Borrow.objects.get(pk=id)
+            form = BorrowForm(instance=borrow)
         return render(
             request,
             'app/borrows/edit.html',
             {
                 'form': form
             }
-            )
-    else:
-        if id == 0:
-            form = BorrowForm(request.POST)
-        else:
-            Borrows = Borrow.objects.get(pk=id)
-            form = BorrowForm(request.POST,instance = Borrows)
-        if form.is_valid():
-            form.save()
-            messages.success(request,"Borrow has been modified successfully !")
-        return redirect('/borrows')
-    
+        )
+
 def delete(request, id):
     Borrows = Borrow.objects.get(pk=id)
     Borrows.delete()
