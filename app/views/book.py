@@ -35,10 +35,24 @@ def store(request):
         else:
             messages.success(request,form.errors)
         return redirect('/books')
-    
+
+
+def update(request, id):
+    if request.method == 'POST':
+        if id == 0:
+            form = BookForm(request.POST)
+        else:
+            book = Book.objects.get(pk=id)
+            form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+        messages.success(request, "Book has been updated successfully !")
+        return redirect('/books')
+
+
 def edit(request, id):
     assert isinstance(request, HttpRequest)
-    if request.method == "GET":
+    if request.method == 'GET':
         if id == 0:
             form = BookForm()
         else:
@@ -51,17 +65,8 @@ def edit(request, id):
                 'form': form
             }
         )
-    else:
-        if id == 0:
-            form = BookForm(request.POST)
-        else:
-            book = Book.objects.get(pk=id)
-            form = BookForm(request.POST, instance=book)
-        if form.is_valid():
-            form.save()
-        messages.success(request, "Book has been updated successfully !")
-        return redirect('/books')
-    
+
+
 def delete(request, id):
     book = Book.objects.get(pk=id)
     book.delete()
