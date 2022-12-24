@@ -49,6 +49,7 @@
                                           <th>Last Name</th>
                                           <th> Gender </th>
                                           <th> Nationality </th>
+                                          <th> DETAILS </th>
                                           <th> EDIT </th>
                                           <th>DELETE</th>
                                         </tr>
@@ -61,6 +62,15 @@
                                           <td>{{ author.last_name }}</td>
                                           <td>{{ author.gender }}</td>
                                           <td>{{ author.nationality }}</td>
+                                          
+                                          <td>
+                                            <a
+                                              href="{% url 'authors_details' author.id %}"
+                                              class="btn btn-secondary"
+                                              >Details</a
+                                            >
+                                          </td>
+
                                           <td>
                                             <a
                                               href="{% url 'authors_edit' author.id %}"
