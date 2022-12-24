@@ -26,6 +26,7 @@ urlpatterns = [
     path('authors/edit/<int:id>',authors.edit,name='authors_edit'),
     path('authors/update/<int:id>', authors.update, name="authors_update"),
     path('authors/delete/<int:id>',authors.delete,name='authors_delete'),
+    path('authors/details/<int:id>',authors.details,name='authors_details'),
     
     path('categories/', categories.index, name='categories_index'),
     path('categories/add', categories.add, name='categories_add'),

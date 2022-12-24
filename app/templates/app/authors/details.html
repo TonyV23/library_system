@@ -1,0 +1,46 @@
+{% extends 'app/layouts/default.html' %}
+{% block content %}
+<!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <div></div>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header py-3">
+                                <h2 class="m-0 font-weight-bold text-secondary">Author Details</h2>
+                            </div>
+                            <div class="card-body">
+                                <!-- Vertical Form -->
+                                <h4><span class="m-0 font-weight-bold text-secondary">Id : </span>{{ author.id }}</h4><br/>
+                                <h4><span class="m-0 font-weight-bold text-secondary">First Name : </span>{{ author.first_name }}</h4><br/>
+                                <h4><span class="m-0 font-weight-bold text-secondary">Last Name : </span>{{ author.last_name }}</h4><br/>
+                                <h4><span class="m-0 font-weight-bold text-secondary">Gender : </span>{{ author.gender }}</h4><br/>
+                                <h4><span class="m-0 font-weight-bold text-secondary">Nationality : </span>{{ author.nationality }}</h4><br/>
+                                <h4><span class="m-0 font-weight-bold text-secondary">Total Books : </span>{{ count_books }}</h4><br/>
+                                <a
+                                href="{% url 'authors_index'%}"
+                                class="btn btn-primary"
+                                >Back</a>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+{% endblock %}
