@@ -9,3 +9,11 @@ class Author(models.Model):
 
     def __str__(self) -> str:
         return self.first_name+ " " +self.last_name
+
+    class Meta :
+        constraints = [
+            models.UniqueConstraint(
+                fields = ['first_name', 'last_name','gender', 'nationality'],
+                name = 'unique_author'
+            )
+        ]
