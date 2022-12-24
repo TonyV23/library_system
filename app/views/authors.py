@@ -1,6 +1,6 @@
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
-from app.models import Author
+from app.models import Author, Book
 from app.forms import AuthorForm
 from django.contrib import messages
 
@@ -14,6 +14,20 @@ def index(request):
             'authors' : authors
         }
     )
+    
+def details(request, id):
+    assert isinstance(request, HttpRequest)
+    if request.method == 'GET':
+        count_books = Book.objects.raw("select book_language from app_book where id = 11")
+        author = Author.objects.get(pk=id)
+        return render(
+            request,
+            'app/authors/details.html',
+            {
+                'count_books' :count_books,
+                'author': author
+            }
+        )
 
 def add(request):
     assert isinstance(request, HttpRequest)
