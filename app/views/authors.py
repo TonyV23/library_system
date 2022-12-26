@@ -18,13 +18,15 @@ def index(request):
 def details(request, id):
     assert isinstance(request, HttpRequest)
     if request.method == 'GET':
-        count_books = Book.objects.raw("select book_language from app_book where id = 11")
+        count_books = Book.objects.filter(author_id=id).values().all().count()
+        books = Book.objects.filter(author_id=id).all()
         author = Author.objects.get(pk=id)
         return render(
             request,
             'app/authors/details.html',
             {
                 'count_books' :count_books,
+                'books' :books,
                 'author': author
             }
         )
