@@ -25,6 +25,15 @@
             </li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa fa-book menu-icon"></i> <span class="nav-text">Emplacements</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'emplacements_add' %}">New Emplacement</a></li>
+                    <li><a href="{% url 'emplacements_index' %}">Display Emplacements</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="fa-solid fa-layer-group"></i><span class="nav-text">Books Category</span>
                 </a>
                 <ul aria-expanded="false">
