@@ -50,6 +50,8 @@
                                           <th>Edition date</th>
                                           <th>Author</th>
                                           <th>Category</th>
+                                          <th>Emplacement</th>
+                                          <th>Exemplaire</th>
                                           <th>EDIT </th>
                                           <th>DELETE</th>
                                         </tr>
@@ -63,6 +65,8 @@
                                           <td>{{ book.edition_date }}</td>
                                           <td>{{ book.author.first_name }}</td>
                                           <td>{{ book.category.category_name }}</td>
+                                          <td>{{ book.emplacement.etagere }} {{ book.emplacement.rank }}</td>
+                                          <td>{{ book.exemplaire }}</td>
                                           <td>
                                             <a
                                               href="{% url 'books_edit' book.id %}"
