@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from app.views import home, authors, borrowers, categories, book, borrows,user
+from app.views import home, authors, borrowers, categories, book, borrows, user, emplacements
 
 
 urlpatterns = [
@@ -56,6 +56,13 @@ urlpatterns = [
     path('borrows/update/<int:id>', borrows.update, name="borrows_update"),
     path('borrows/delete/<int:id>',borrows.delete, name='borrows_delete'),
     path('borrows/getBooks',borrows.getBooks, name='borrows_getBooks'),
+    
+    path('emplacements/',emplacements.index , name='emplacements_index'),
+    path('emplacements/add',emplacements.add, name='emplacements_add'),
+    path('emplacements/store',emplacements.store, name='emplacements_store'),
+    path('emplacements/edit/<int:id>',emplacements.edit, name='emplacements_edit'),
+    path('emplacements/update/<int:id>', emplacements.update, name="emplacements_update"),
+    path('emplacements/delete/<int:id>',emplacements.delete, name='emplacements_delete'),
 
     path('user/', user.index, name='user_index'),
     path('', user.admin_login, name='user_login'),
