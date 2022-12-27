@@ -25,7 +25,7 @@
             </li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="fa fa-book menu-icon"></i> <span class="nav-text">Emplacements</span>
+                    <i class="fa-solid fa-sitemap"></i></fa-solid> <span class="nav-text">Emplacements</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{% url 'emplacements_add' %}">New Emplacement</a></li>
@@ -57,6 +57,19 @@
                 <ul aria-expanded="false">
                     <li><a href="{% url 'borrows_add' %}">New Borrow</a></li>
                     <li><a href="{% url 'borrows_index' %}">Display Borrows</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa-solid fa-print"></i><span class="nav-text">Print</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'print_authors' %}">Authors</a></li>
+                    <li><a href="{% url 'print_categories' %}">Categories</a></li>
+                    <li><a href="{% url 'print_emplacements' %}">Emplacements</a></li>
+                    <li><a href="{% url 'print_books' %}">Books</a></li>
+                    <li><a href="{% url 'print_borrowers' %}">Borrowers</a></li>
+                    <li><a href="{% url 'print_borrows' %}">Borrows</a></li>
                 </ul>
             </li>
         </ul>
