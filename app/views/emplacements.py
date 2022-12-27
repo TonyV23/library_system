@@ -31,8 +31,11 @@ def store(request):
     if request.method == 'POST':
         form = EmplacementForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request,"Emplacement has been saved successfully !")
+            if form.cleaned_data['rank'] <= 0 :
+                messages.success(request,"Rank Invalid !")
+            else :
+                form.save()
+                messages.success(request,"Emplacement has been saved successfully !")
         return redirect('/emplacements')
 
 
@@ -60,8 +63,11 @@ def update(request, id):
             emplacement = Emplacement.objects.get(pk=id)
             form = EmplacementForm(request.POST, instance=emplacement)
         if form.is_valid():
-            form.save()
-        messages.success(request, "Emplacement has been updated successfully !")
+            if form.cleaned_data['rank'] <= 0 :
+                messages.success(request,"Rank Invalid !")
+            else :
+                form.save()
+                messages.success(request, "Emplacement has been updated successfully !")
         return redirect('/emplacements')
 
 def delete(request, id):
