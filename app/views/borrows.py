@@ -35,13 +35,19 @@ def store(request):
         book_id = form['book'].value()
         quantite_exemplaire = getBookExemplaire(book_id)
         if form.is_valid():
-            if quantite_exemplaire > 0 :
+            if quantite_exemplaire <= 0 :
+                messages.success(request," Book exemplaire insufficient ! ")
+                
+            elif form.cleaned_data['borrow_starting_date'] == form.cleaned_data['borrow_ending_date'] :
+                messages.success(request," Incorrect Timeline ! ")
+                
+            elif form.cleaned_data['borrow_starting_date'] >= form.cleaned_data['borrow_ending_date'] :
+                messages.success(request," Incorrect Timeline ! ")
+            else :
                 form.save()
                 quantite_exemplaire = quantite_exemplaire - 1
                 Book.objects.filter(id=book_id).update(exemplaire = quantite_exemplaire)
                 messages.success(request," Borrow has been saved successfully ! ")
-            else :
-                messages.success(request," Book exemplaire insufficient ! ")
         else:
             messages.success(request,form.errors)
         return redirect('/borrows')
