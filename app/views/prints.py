@@ -68,3 +68,25 @@ def printEmplacements(request):
             'emplacements' : emplacements
         }
     )
+def resume(request):
+    assert isinstance(request, HttpRequest)
+    
+    authors = Author.objects.all()
+    books = Book.objects.all()
+    borrowers = Borrower.objects.all()
+    Borrows = Borrow.objects.all()
+    categories = Category.objects.all()
+    emplacements = Emplacement.objects.all()
+    
+    return render(
+        request,
+        'app/prints/resume.html',
+        {
+            'emplacements' : emplacements,
+            'authors' : authors,
+            'books': books,
+            'borrowers': borrowers,
+            'borrows': Borrows,
+            'categories': categories
+        }
+    )

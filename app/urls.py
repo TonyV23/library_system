@@ -75,6 +75,7 @@ urlpatterns = [
     path('print/borrows', prints.printBorrows, name= 'print_borrows'),
     path('print/categories', prints.printCategories, name= 'print_categories'),
     path('print/emplacements', prints.printEmplacements, name= 'print_emplacements'),
+    path('print/resume', prints.resume, name= 'print_resume'),
 
 
 ]
