@@ -30,8 +30,11 @@ def store(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request,"Book has been saved successfully !")
+            if form.cleaned_data['exemplaire'] <= 0 :
+                messages.success(request,"Exemplaire Quantity Invalid !")
+            else :
+                form.save()
+                messages.success(request,"Book has been saved successfully !")
         else:
             messages.success(request,form.errors)
         return redirect('/books')
@@ -45,8 +48,11 @@ def update(request, id):
             book = Book.objects.get(pk=id)
             form = BookForm(request.POST, instance=book)
         if form.is_valid():
-            form.save()
-        messages.success(request, "Book has been updated successfully !")
+            if form.cleaned_data['exemplaire'] <= 0 :
+                messages.success(request,"Exemplaire Quantity Invalid !")
+            else :
+                form.save()
+                messages.success(request, "Book has been updated successfully !")
         return redirect('/books')
 
 
