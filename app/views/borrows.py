@@ -1,6 +1,6 @@
 from django.shortcuts import redirect,render
 from django.http import HttpRequest
-from app.models import Borrow,Category,Book
+from app.models import Borrow,Category,Book,Borrow
 from app.forms import BorrowForm
 from django.contrib import messages
 
@@ -32,9 +32,16 @@ def add(request):
 def store(request):
     if request.method == 'POST':
         form = BorrowForm(request.POST)
+        book_id = form['book'].value()
+        quantite_exemplaire = getBookExemplaire(book_id)
         if form.is_valid():
-            form.save()
-            messages.success(request," Borrow has been saved successfully ! ")
+            if quantite_exemplaire > 0 :
+                form.save()
+                quantite_exemplaire = quantite_exemplaire - 1
+                Book.objects.filter(id=book_id).update(exemplaire = quantite_exemplaire)
+                messages.success(request," Borrow has been saved successfully ! ")
+            else :
+                messages.success(request," Book exemplaire insufficient ! ")
         else:
             messages.success(request,form.errors)
         return redirect('/borrows')
@@ -69,6 +76,10 @@ def edit(request, id):
 
 def delete(request, id):
     Borrows = Borrow.objects.get(pk=id)
+    book_id = list(Borrow.objects.filter(id = id).values('book_id'))[0]['book_id']
+    quantite_exemplaire = getBookExemplaire(book_id)
+    quantite_exemplaire = quantite_exemplaire + 1
+    Book.objects.filter(id = book_id).update(exemplaire = quantite_exemplaire)
     Borrows.delete()
     messages.success(request,"Borrow has been deleted successfully !")
     return redirect('/borrows')
@@ -83,3 +94,7 @@ def getBooks(request):
             'books': books
         }
     )
+    
+def getBookExemplaire(book_id):
+   exemplaire = list(Book.objects.filter(id=book_id).values('exemplaire'))[0]['exemplaire']
+   return exemplaire
