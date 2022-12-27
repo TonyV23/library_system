@@ -1,0 +1,59 @@
+{% include 'app/partials/head.html' %}
+{% block content %}
+
+<div class="content-body">
+
+  <div class="row page-titles mx-0">
+    <div class="col p-md-0">
+      <ol class="breadcrumb">
+        <div></div>
+      </ol>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Authors</h2>
+            <div class="card-header py-3">
+              <a href="{% url 'authors_index' %}" onClick="print()" class="btn btn-outline-primary">Print</a>
+              <a href="{% url 'home' %} " 
+                                onclick="return confirm('Do you want really to cancel this action?')"
+                                type="submit" class="btn btn-outline-danger">Cancel  
+                            </a>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered zero-configuration">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th> Gender </th>
+                    <th> Nationality </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for author in authors %}
+                  <tr>
+                    <td>{{ author.id }}</td>
+                    <td>{{ author.first_name }}</td>
+                    <td>{{ author.last_name }}</td>
+                    <td>{{ author.gender }}</td>
+                    <td>{{ author.nationality }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
