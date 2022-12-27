@@ -17,7 +17,7 @@ def index(request):
     )
     
 
-def admin_login(request):
+def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -43,6 +43,6 @@ def store(request):
         return redirect('/')
   
 
-def admin_logout(request):
+def user_logout(request):
     logout(request)
     return redirect('/')
