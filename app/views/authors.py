@@ -55,6 +55,8 @@ def store(request):
         if form.is_valid():
             form.save()
             messages.success(request,"Author has been saved successfully !")
+        else :
+            messages.success(request, form.errors)
         return redirect('/authors')
 
 

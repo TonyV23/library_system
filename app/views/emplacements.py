@@ -40,6 +40,8 @@ def store(request):
             else :
                 form.save()
                 messages.success(request,"Emplacement has been saved successfully !")
+        else :
+            messages.success(request, form.errors)
         return redirect('/emplacements')
 
 

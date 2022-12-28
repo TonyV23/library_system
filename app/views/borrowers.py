@@ -39,6 +39,8 @@ def store(request):
         if form.is_valid():
             form.save()
             messages.success(request,"Borrower has been saved successfully !")
+        else :
+            messages.success(request, form.errors)
         return redirect('/borrowers')
 
 
