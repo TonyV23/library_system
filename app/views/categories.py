@@ -31,7 +31,9 @@ def store(request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
-        messages.success(request, "Category has been saved successfully !")
+            messages.success(request, "Category has been saved successfully !")
+        else :
+            messages.success(request, form.errors)
         return redirect('/categories')
     
 
