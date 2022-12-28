@@ -1,0 +1,202 @@
+{% include 'app/partials/head.html' %}
+{% block content %}
+
+<div class="content-body">
+
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <div></div>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Resume</h2>
+                        <div class="card-header py-3">
+                            <a href="{% url 'emplacements_index' %}" onClick="print()"
+                                class="btn btn-outline-primary">Print</a>
+                            <a href="{% url 'home' %} " 
+                                onclick="return confirm('Do you want really to cancel this action?')"
+                                type="submit" class="btn btn-outline-danger">Cancel  
+                            </a>
+                        </div>
+                        <div class="table-responsive">
+                            <br>
+                            <br>
+                            <h4 class="m-0 font-weight-bold text-primary align-content-center align-center">Author</h4>
+                            <br>
+                            <table class="table table-striped table-bordered zero-configuration">
+                              <thead>
+                                <tr>
+                                  <th>Id</th>
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th> Gender </th>
+                                  <th> Nationality </th>
+
+                                  
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for author in authors %}
+                                <tr>
+                                  <td>{{ author.id }}</td>
+                                  <td>{{ author.first_name }}</td>
+                                  <td>{{ author.last_name }}</td>
+                                  <td>{{ author.gender }}</td>
+                                  <td>{{ author.nationality }}</td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                          
+                        <div class="table-responsive">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h4 class="m-0 font-weight-bold text-primary align-content-center align-center">Books</h4>
+                            <br>
+                            <table class="table table-striped table-bordered zero-configuration">
+                              <thead>
+                                <tr>
+                                  <th>Id</th>
+                                  <th>Title</th>
+                                  <th>Language</th>
+                                  <th>Edition date</th>
+                                  <th>Author</th>
+                                  <th>Category</th>
+                                  <th>Emplacement</th>
+                                  <th>Exemplaire</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for book in books %}
+                                <tr>
+                                  <td>{{ book.id }}</td>
+                                  <td>{{ book.book_title }}</td>
+                                  <td>{{ book.book_language }}</td>
+                                  <td>{{ book.edition_date }}</td>
+                                  <td>{{ book.author.first_name }}</td>
+                                  <td>{{ book.category.category_name }}</td>
+                                  <td>{{ book.emplacement.etagere }} {{ book.emplacement.rank }}</td>
+                                  <td>{{ book.exemplaire }}</td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="table-responsive">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h4 class="m-0 font-weight-bold text-primary align-content-center align-center">Borrowers</h4>
+                            <br>
+                            <br>
+                            <table class="table table-striped table-bordered zero-configuration">
+                              <thead>
+                                <tr>
+                                  <th>Id</th>
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th> Gender </th>
+                                  <th> Nationality </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for borrower in borrowers %}
+                                <tr>
+                                  <td>{{ borrower.id }}</td>
+                                  <td>{{ borrower.first_name }}</td>
+                                  <td>{{ borrower.last_name }}</td>
+                                  <td>{{ borrower.gender }}</td>
+                                  <td>{{ borrower.nationality }}</td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="table-responsive">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h4 class="m-0 font-weight-bold text-primary align-content-center align-center">Borrows</h4>
+                            <br>
+                            <br>
+                            <table class="table table-striped table-bordered zero-configuration">
+                              <thead>
+                                <tr>
+                                  <th>Id</th>
+                                  <th>Borrower</th>
+                                  <th>Book Title</th>
+                                  <th>Category</th>
+                                  <th>Starting Date</th>
+                                  <th>Ending Date</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for borrow in borrows %}
+                                <tr>
+                                  <td>{{ borrow.id }}</td>
+                                  <td>
+                                    {{ borrow.borrower.first_name}} 
+                                    {{borrow.borrower.last_name}}
+                                  </td>
+                                  <td>{{ borrow.book.book_title}}</td>
+                                  <td>{{ borrow.book.category.category_name }}</td>
+                                  <td>{{ borrow.borrow_starting_date }}</td>
+                                  <td>{{ borrow.borrow_ending_date }}</td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        <div class="table-responsive">
+                            
+                            <table class="table table-striped table-bordered zero-configuration">
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <h4 class="m-0 font-weight-bold text-primary align-content-center align-center">Emplacements</h4>
+                                <br>
+                                <br>
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Etagere</th>
+                                        <th>Rank</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for emplacement in emplacements %}
+                                    <tr>
+                                        <td>{{ emplacement.id }}</td>
+                                        <td>{{ emplacement.etagere }}</td>
+                                        <td>{{ emplacement.rank }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

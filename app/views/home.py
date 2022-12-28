@@ -3,6 +3,9 @@ from django.shortcuts import render
 from app.models import Author, Book, Borrow, Borrower, Category
 from datetime import datetime
 
+from django.db.models import Count
+
+
 def index(request):
     count_authors = Author.objects.all().count()
     count_books = Book.objects.all().count()
@@ -26,6 +29,12 @@ def index(request):
     author_book_dict = getAllAuthorsOccurrence()
     category_book_dict = getAllCategoriesOccurrence()
 
+    # for principal chart 
+    books_borrowed_per_day = Borrow.objects.extra(select={'day': 'date( borrow_starting_date )'}).values('day').annotate(available=Count('borrow_starting_date'))
+    books_borrowed_per_year = Borrow.objects.extra(select={'year':"EXTRACT(year FROM borrow_starting_date)"}).values('year').annotate(Count('pk')) 
+    books_borrowed_per_month = Borrow.objects.extra(select={'month':"EXTRACT(month FROM borrow_starting_date)"}).values('month').annotate(Count('pk'))
+
+    page_title = 'Home'
 
     return render(
         request,
@@ -39,7 +48,14 @@ def index(request):
             'get_all_authors_names_list' : get_all_authors_names_list,
             'author_book_dict' : author_book_dict.values(),
             'get_all_books_categories_name_list' : get_all_books_categories_name_list,
-            'category_book_dict' : category_book_dict.values()
+            'category_book_dict' : category_book_dict.values(),
+
+            'books_borrowed_per_day' : books_borrowed_per_day, 
+            'books_borrowed_per_year' : books_borrowed_per_year, 
+            'books_borrowed_per_month' : books_borrowed_per_month,
+
+            'page_title' : page_title 
+
         }           
         
     )

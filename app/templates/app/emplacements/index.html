@@ -18,10 +18,10 @@
                   <div class="col-12">
                       <div class="card">
                           <div class="card-body">
-                              <h2 class="card-title">Books</h2>
+                              <h2 class="card-title">Emplacements</h2>
                               <div class="card-header py-3">
-                                <a href="{% url 'books_add' %}" class="btn btn-primary"
-                                  >New Book</a
+                                <a href="{% url 'emplacements_add' %}" class="btn btn-primary"
+                                  >New Emplacement</a
                                 >
                               </div>
                                {% comment %} {% if messages %}
@@ -45,45 +45,35 @@
                                       <thead>
                                         <tr>
                                           <th>Id</th>
-                                          <th>Title</th>
-                                          <th>Language</th>
-                                          <th>Edition date</th>
-                                          <th>Author</th>
-                                          <th>Category</th>
-                                          <th>Emplacement</th>
-                                          <th>Exemplaire</th>
-                                          <th>EDIT </th>
+                                          <th>Etagere</th>
+                                          <th>Rank</th>
+                                          <th> EDIT </th>
                                           <th>DELETE</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {% for book in books %}
+                                        {% for emplacement in emplacements %}
                                         <tr>
-                                          <td>{{ book.id }}</td>
-                                          <td>{{ book.book_title }}</td>
-                                          <td>{{ book.book_language }}</td>
-                                          <td>{{ book.edition_date }}</td>
-                                          <td>{{ book.author.first_name }}</td>
-                                          <td>{{ book.category.category_name }}</td>
-                                          <td>{{ book.emplacement.etagere }} {{ book.emplacement.rank }}</td>
-                                          <td>{{ book.exemplaire }}</td>
+                                          <td>{{ emplacement.id }}</td>
+                                          <td>{{ emplacement.etagere }}</td>
+                                          <td>{{ emplacement.rank }}</td>
                                           <td>
                                             <a
-                                              href="{% url 'books_edit' book.id %}"
+                                              href="{% url 'emplacements_edit' emplacement.id %}"
                                               class="btn btn-primary"
                                               >Edit</a
                                             >
                                             </td>
-
+                            
                                             <td>
                                             <form
-                                              action="{% url 'books_delete' book.id %}"
+                                              action="{% url 'emplacements_delete' emplacement.id %}"
                                               method="post"
                                             >
                                               {% csrf_token %}
                                               <button
                                                 type="submit"
-                                                onclick="return confirm('Do you want really to delete this book ?')"
+                                                onclick="return confirm('Do you want really to delete this emplacement ?')"
                                                 class="btn btn-danger"
                                               >
                                                 Delete

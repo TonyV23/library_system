@@ -4,3 +4,4 @@ from .book_form import BookForm
 from .borrower_form import BorrowerForm
 from .borrow_form import BorrowForm
 from .user_form import UserForm
+from .emplacement_form import EmplacementForm

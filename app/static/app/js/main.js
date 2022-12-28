@@ -1,4 +1,4 @@
-// Getproduct by category_id
+// GetProduct by category_id
 $(function() {
     $('#category_id').on("change", function () {
         category_id = $(this).val();
@@ -14,3 +14,7 @@ $(function() {
         );
     } );
 });
+
+function print(){
+    all_tables.print();
+}

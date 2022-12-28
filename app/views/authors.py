@@ -6,38 +6,46 @@ from django.contrib import messages
 
 def index(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'All Authors'
     authors = Author.objects.all()
     return render(
         request,
         'app/authors/index.html',
         {
-            'authors' : authors
+            'authors' : authors,
+            'page_title' :page_title
         }
     )
     
 def details(request, id):
     assert isinstance(request, HttpRequest)
+    page_title = 'Details Author'
     if request.method == 'GET':
-        count_books = Book.objects.raw("select book_language from app_book where id = 11")
+        count_books = Book.objects.filter(author_id=id).values().all().count()
+        books = Book.objects.filter(author_id=id).all()
         author = Author.objects.get(pk=id)
         return render(
             request,
             'app/authors/details.html',
             {
                 'count_books' :count_books,
-                'author': author
+                'books' :books,
+                'author': author,
+                'page_title' : page_title
             }
         )
 
 def add(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'Add Author'
     if request.method == 'GET' :
         form = AuthorForm
     return render(
         request,
         'app/authors/add.html',
         {
-            'form' : form
+            'form' : form,
+            'page_title' :page_title
         }
     )
 
@@ -47,11 +55,14 @@ def store(request):
         if form.is_valid():
             form.save()
             messages.success(request,"Author has been saved successfully !")
+        else :
+            messages.success(request, form.errors)
         return redirect('/authors')
 
 
 def edit(request, id):
     assert isinstance(request, HttpRequest)
+    page_title = 'Edit Author'
     if request.method == 'GET':
         if id == 0:
             form = AuthorForm()
@@ -62,7 +73,8 @@ def edit(request, id):
             request,
             'app/authors/edit.html',
             {
-                'form': form
+                'form': form,
+                'page_title' :page_title
             }
         )
 

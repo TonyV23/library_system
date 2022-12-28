@@ -5,7 +5,7 @@ class Emplacement(models.Model):
     rank = models.IntegerField(help_text='rangé du livre')
 
     def __str__(self) -> str:
-        return self.etagere +" "+ self.rank
+        return self.etagere +" "+ str(self.rank)
 
     class Meta :
         constraints = [

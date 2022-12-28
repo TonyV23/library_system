@@ -49,6 +49,8 @@
                                           <th>Last Name</th>
                                           <th> Gender </th>
                                           <th> Nationality </th>
+                                          <th> Phone </th>
+                                          <th> Email </th>
                                           <th> EDIT </th>
                                           <th>DELETE</th>
                                         </tr>
@@ -61,6 +63,8 @@
                                           <td>{{ borrower.last_name }}</td>
                                           <td>{{ borrower.gender }}</td>
                                           <td>{{ borrower.nationality }}</td>
+                                          <td>{{ borrower.phone }}</td>
+                                          <td>{{ borrower.email }}</td>
                                           <td>
                                             <a
                                               href="{% url 'borrowers_edit' borrower.id%}"
