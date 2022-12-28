@@ -18,6 +18,7 @@ def index(request):
     
 
 def user_login(request):
+    page_title = 'Login'
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -31,7 +32,10 @@ def user_login(request):
             
     return render(
         request,
-        'app/user/login.html'
+        'app/user/login.html',
+        {
+            'page_title' : page_title
+        }
     )
 
    

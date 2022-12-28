@@ -7,22 +7,26 @@ from app.forms import BookForm
 
 def index(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'All Books'
     books = Book.objects.all()
     return render(
         request,
         'app/books/index.html',
         {
-            'books': books
+            'books': books,
+            'page_title' : page_title 
         }
     )
     
 def add(request):
+    page_title = 'Add book'
     form = BookForm()
     return render(
         request, 
         'app/books/add.html',
         {
-            'form': form
+            'form': form,
+            'page_title' : page_title
         }
     )
     
@@ -58,6 +62,7 @@ def update(request, id):
 
 def edit(request, id):
     assert isinstance(request, HttpRequest)
+    page_title = 'Edit Book'
     if request.method == 'GET':
         if id == 0:
             form = BookForm()
@@ -68,7 +73,8 @@ def edit(request, id):
             request,
             'app/books/edit.html',
             {
-                'form': form
+                'form': form,
+                'page_title' : page_title
             }
         )
 

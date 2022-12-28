@@ -7,17 +7,20 @@ from django.contrib import messages
 # Create your views here.
 def index(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'All Borrows'
     Borrows = Borrow.objects.all()
     return render(
         request,
         'app/borrows/index.html',
         {
-            'borrows': Borrows
+            'borrows': Borrows,
+            'page_title' : page_title
         }
     )
 
 def add(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'Add Borrow'
     categories = Category.objects.all()
     form = BorrowForm()
     return render(
@@ -25,7 +28,8 @@ def add(request):
         'app/borrows/add.html',
         {
             'form': form,
-            'categories':categories
+            'categories':categories,
+            'page_title' : page_title
         }
     )
 
@@ -66,6 +70,7 @@ def update(request, id):
 
 def edit(request, id):
     assert isinstance(request, HttpRequest)
+    page_title = 'Edit Borrow'
     if request.method == 'GET':
         if id == 0:
             form = BorrowForm()
@@ -76,7 +81,8 @@ def edit(request, id):
             request,
             'app/borrows/edit.html',
             {
-                'form': form
+                'form': form,
+                'page_title': page_title
             }
         )
 
@@ -91,6 +97,7 @@ def delete(request, id):
     return redirect('/borrows')
 
 def getBooks(request):
+    page_title = 'Get book'
     category_id = request.GET.get('category_id')
     books = Book.objects.filter(category_id = category_id).order_by('book_title')
     return render(

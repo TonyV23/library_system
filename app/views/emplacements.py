@@ -6,24 +6,28 @@ from django.contrib import messages
 
 def index(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'All emplacements'
     emplacements = Emplacement.objects.all()
     return render(
         request,
         'app/emplacements/index.html',
         {
-            'emplacements' : emplacements
+            'emplacements' : emplacements,
+            'page_title' : page_title
         }
     )
 
 def add(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'Add emplacement'
     if request.method == 'GET' :
         form = EmplacementForm
     return render(
         request,
         'app/emplacements/add.html',
         {
-            'form' : form
+            'form' : form,
+            'page_title' : page_title
         }
     )
 
@@ -41,6 +45,7 @@ def store(request):
 
 def edit(request, id):
     assert isinstance(request, HttpRequest)
+    page_title = 'Edit emplacement'
     if request.method == 'GET':
         if id == 0:
             form = EmplacementForm()
@@ -51,7 +56,8 @@ def edit(request, id):
             request,
             'app/emplacements/edit.html',
             {
-                'form': form
+                'form': form,
+                'page_title' : page_title
             }
         )
 

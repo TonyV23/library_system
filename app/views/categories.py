@@ -6,23 +6,27 @@ from app.models import Category
 from app.forms import CategoryForm
 
 def index(request):
+    page_title = 'All Categories'
     assert isinstance(request, HttpRequest)
     categories = Category.objects.all()
     return render(
         request,
         'app/categories/index.html',
         {
-            'categories': categories
+            'categories': categories,
+            'page_title' : page_title
         }
     )
     
 def add(request):
+    page_title = 'Add Category'
     form = CategoryForm()
     return render(
         request, 
         'app/categories/add.html',
         {
-            'form': form
+            'form': form,
+            'page_title' : page_title
         }
     )
     
@@ -49,6 +53,7 @@ def update(request, id):
 
 def edit(request, id):
     assert isinstance(request, HttpRequest)
+    page_title = 'Edit Category'
     if request.method == 'GET':
         if id == 0:
             form = CategoryForm()
@@ -59,7 +64,8 @@ def edit(request, id):
             request,
             'app/categories/edit.html',
             {
-                'form': form
+                'form': form,
+                'page_title' : page_title 
             }
         )
 

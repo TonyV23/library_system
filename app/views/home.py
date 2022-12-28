@@ -34,6 +34,8 @@ def index(request):
     books_borrowed_per_year = Borrow.objects.extra(select={'year':"EXTRACT(year FROM borrow_starting_date)"}).values('year').annotate(Count('pk')) 
     books_borrowed_per_month = Borrow.objects.extra(select={'month':"EXTRACT(month FROM borrow_starting_date)"}).values('month').annotate(Count('pk'))
 
+    page_title = 'Home'
+
     return render(
         request,
         'app/home/index.html',
@@ -50,7 +52,9 @@ def index(request):
 
             'books_borrowed_per_day' : books_borrowed_per_day, 
             'books_borrowed_per_year' : books_borrowed_per_year, 
-            'books_borrowed_per_month' : books_borrowed_per_month, 
+            'books_borrowed_per_month' : books_borrowed_per_month,
+
+            'page_title' : page_title 
 
         }           
         

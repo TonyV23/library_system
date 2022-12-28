@@ -6,17 +6,20 @@ from django.contrib import messages
 
 def index(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'All Authors'
     authors = Author.objects.all()
     return render(
         request,
         'app/authors/index.html',
         {
-            'authors' : authors
+            'authors' : authors,
+            'page_title' :page_title
         }
     )
     
 def details(request, id):
     assert isinstance(request, HttpRequest)
+    page_title = 'Details Author'
     if request.method == 'GET':
         count_books = Book.objects.filter(author_id=id).values().all().count()
         books = Book.objects.filter(author_id=id).all()
@@ -27,19 +30,22 @@ def details(request, id):
             {
                 'count_books' :count_books,
                 'books' :books,
-                'author': author
+                'author': author,
+                'page_title' : page_title
             }
         )
 
 def add(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'Add Author'
     if request.method == 'GET' :
         form = AuthorForm
     return render(
         request,
         'app/authors/add.html',
         {
-            'form' : form
+            'form' : form,
+            'page_title' :page_title
         }
     )
 
@@ -54,6 +60,7 @@ def store(request):
 
 def edit(request, id):
     assert isinstance(request, HttpRequest)
+    page_title = 'Edit Author'
     if request.method == 'GET':
         if id == 0:
             form = AuthorForm()
@@ -64,7 +71,8 @@ def edit(request, id):
             request,
             'app/authors/edit.html',
             {
-                'form': form
+                'form': form,
+                'page_title' :page_title
             }
         )
 

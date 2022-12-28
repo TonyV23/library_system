@@ -6,25 +6,29 @@ from app.forms.borrower_form import BorrowerForm
 
 def index(request):
     borrowers = Borrower.objects.all()
-
+    page_title = 'All Borrowers'
     return render(
         request, 
         'app/borrowers/index.html',
         {
-            'borrowers': borrowers
+            'borrowers': borrowers,
+            'page_title' : page_title 
         }
     )
 
 
 def add(request):
     assert isinstance(request, HttpRequest)
+    page_title = 'Add Borrower'
     if request.method == 'GET' :
         form = BorrowerForm
     return render(
         request,
         'app/borrowers/add.html',
         {
-            'form' : form
+            'form' : form,
+            'page_title' : page_title
+            
         }
     )
 
@@ -52,6 +56,7 @@ def update(request, id):
 
 def edit(request, id):
     assert isinstance(request, HttpRequest)
+    page_title = 'Edit Borrower'
     if request.method == 'GET':
         if id == 0:
             form = BorrowerForm()
@@ -62,7 +67,8 @@ def edit(request, id):
             request,
             'app/borrowers/edit.html',
             {
-                'form': form
+                'form': form,
+                'page_title' : page_title
             }
         )
 
