@@ -1,0 +1,96 @@
+{% extends 'app/layouts/default.html' %} {% block content %}
+<!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+          <div class="row page-titles mx-0">
+              <div class="col p-md-0">
+                  <ol class="breadcrumb">
+                      <div></div>
+                  </ol>
+              </div>
+          </div>
+          <!-- row -->
+
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="card">
+                          <div class="card-body">
+                              <h2 class="card-title">Categories</h2>
+                              <div class="card-header py-3">
+                                <a href="{% url 'categories_add' %}" class="btn btn-primary"
+                                  >New Category</a
+                                >
+                              </div>
+                               {% comment %} {% if messages %}
+                               {% for message in messages %} 
+                               <p class="alert alert-success w-100 h-100">{{ message }} </p>
+                               {% endfor %}
+                               {% endif %} {% endcomment %}
+
+                               {% if messages %}
+                               {% for message in messages %} 
+                              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fas fa-alert mr-1"></i>{{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              {% endfor %}
+                              {% endif %}
+                              <div class="table-responsive">
+                                  <table class="table table-striped table-bordered zero-configuration">
+                                      <thead>
+                                        <tr>
+                                          <th>Id</th>
+                                          <th>Category Name</th>
+                                          <th> EDIT </th>
+                                          <th>DELETE</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {% for category in categories %}
+                                        <tr>
+                                          <td>{{ category.id }}</td>
+                                          <td>{{ category.category_name }}</td>
+                                          <td>
+                                            <a
+                                              href="{% url 'categories_edit' category.id %}"
+                                              class="btn btn-primary"
+                                              >Edit</a
+                                            >
+                                            </td>
+                                            
+                                            <td>
+                                            <form
+                                              action="{% url 'categories_delete' category.id %}"
+                                              method="post"
+                                            >
+                                              {% csrf_token %}
+                                              <button
+                                                type="submit"
+                                                onclick="return confirm('Do you want really to delete this Category ?')"
+                                                class="btn btn-danger"
+                                              >
+                                                Delete
+                                              </button>
+                                            </form>
+                                          </td>
+                                        </tr>
+                                        {% endfor %}
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- #/ container -->
+      </div>
+      <!--**********************************
+          Content body end
+      ***********************************-->
+{% endblock %}

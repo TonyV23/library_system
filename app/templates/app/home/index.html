@@ -1,0 +1,222 @@
+{% extends 'app/layouts/default.html' %} {% block content %}
+<div class="content-body">
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-lg-3 col-sm-6">
+        <div class="card gradient-1">
+          <div class="card-body">
+            <h3 class="card-title text-white">Total Books</h3>
+            <div class="d-inline-block">
+              <h2 class="text-white">{{count_books}}</h2>
+              <p class="text-white mb-0">{{time}}</p>
+            </div>
+            <span class="float-right display-5 opacity-5"
+              ><i class="fa fa-book"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="card gradient-2">
+          <div class="card-body">
+            <h3 class="card-title text-white">Total Authors</h3>
+            <div class="d-inline-block">
+              <h2 class="text-white">{{count_authors}}</h2>
+              <p class="text-white mb-0">{{time}}</p>
+            </div>
+            <span class="float-right display-5 opacity-5"
+              ><i class="fa fa-user"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="card gradient-3">
+          <div class="card-body">
+            <h3 class="card-title text-white">Total Borrowers</h3>
+            <div class="d-inline-block">
+              <h2 class="text-white">{{count_borrows}}</h2>
+              <p class="text-white mb-0">{{time}}</p>
+            </div>
+            <span class="float-right display-5 opacity-5"
+              ><i class="fa fa-users"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="card gradient-8">
+          <div class="card-body">
+            <h3 class="card-title text-white">Total Borrowed Books</h3>
+            <div class="d-inline-block">
+              <h2 class="text-white">{{count_borrowers}}</h2>
+              <p class="text-white mb-0">{{time}}</p>
+            </div>
+            <span class="float-right display-5 opacity-5"
+              ><i class="fa fa-shopping-cart"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    {% load static %}
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="active-member">
+              <div class="row">
+
+                <!-- principal chart for books Borrowed per day -->
+                
+                <div class="col-xl-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card-body">
+                        <h5 class="card-title">Book Borrowed per day</h5>
+                        <!-- Line Chart -->
+                          
+                        <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                          <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                              new Chart(document.querySelector('#lineChart'), {
+                                type: 'line',
+                                data: {
+                                  labels: [{% for book_borrowed_per_day in books_borrowed_per_day %} '{{ book_borrowed_per_day.day }}', {% endfor %}],
+                                  datasets: [{
+                                    label: 'Line Chart',
+                                    data: [{% for book_borrowed_per_day in books_borrowed_per_day %} '{{ book_borrowed_per_day.available }}', {% endfor %}],
+                                    fill: false,
+                                    borderColor: 'rgb(100, 192, 192)',
+                                    tension: 0.01
+                                  }]
+                                },
+                                options: {
+                                  scales: {
+                                    y: {
+                                      beginAtZero: true
+                                    }
+                                  }
+                                }
+                              });
+                            });
+                          </script>
+
+                        <!-- End Line CHart -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- end principal chart for books Borrowed per day -->
+                
+                <div class="col-lg-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card-body">
+                        <h5 class="card-title">Authors with their books</h5>
+                        <!-- Pie Chart -->
+                        <canvas id="pieChart" width="400" height="400"></canvas>
+                        <script>
+                          document.addEventListener("DOMContentLoaded", () => {
+                            new Chart(document.querySelector('#pieChart'), {
+                              type: 'pie',
+                              data: {
+                                labels: [{% for name in get_all_authors_names_list %} '{{name}}', {% endfor %}],
+                                datasets: [{
+                                  label: 'Librarian Dataset',
+                                  data: [{% for occurrence_name in author_book_dict %} '{{ occurrence_name }}', {% endfor %}],
+                                  backgroundColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(192,136,235)',
+                                    'rgb(74,119,254)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(201, 203, 207, 0.2)'
+                                  ],
+                                  borderColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(255, 159, 64)',
+                                    'rgb(255, 205, 86)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(153, 102, 255)',
+                                    'rgb(201, 203, 207)'
+                              ],
+                                  hoverOffset: 4
+                                }]
+                              }
+                            });
+                          });
+                        </script>
+                        <!-- End Pie CHart -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Books and their Categories</h5>
+
+                      <!-- Bar Chart -->
+                      <canvas id="barChart" width="400" height="400"></canvas>
+                      <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                          new Chart(document.querySelector('#barChart'), {
+                            type: 'bar',
+                            data: {
+                              labels: [{% for category_name in get_all_books_categories_name_list %} '{{category_name}}', {% endfor %} ],
+                              datasets: [{
+                                label: 'Bar Chart',
+                                data: [{% for book_category in category_book_dict %} '{{book_category}}', {% endfor %} ],
+                                backgroundColor: [
+                                  'rgba(255, 99, 132, 0.2)',
+                                  'rgba(255, 159, 64, 0.2)',
+                                  'rgba(255, 205, 86, 0.2)',
+                                  'rgba(75, 192, 192, 0.2)',
+                                  'rgba(54, 162, 235, 0.2)',
+                                  'rgba(153, 102, 255, 0.2)',
+                                  'rgba(201, 203, 207, 0.2)'
+                                ],
+                                borderColor: [
+                                  'rgb(255, 99, 132)',
+                                  'rgb(255, 159, 64)',
+                                  'rgb(255, 205, 86)',
+                                  'rgb(75, 192, 192)',
+                                  'rgb(54, 162, 235)',
+                                  'rgb(153, 102, 255)',
+                                  'rgb(201, 203, 207)'
+                                ],
+                                borderWidth: 1
+                              }]
+                            },
+                            options: {
+                              scales: {
+                                y: {
+                                  beginAtZero: true
+                                }
+                              }
+                            }
+                          });
+                        });
+                      </script>
+                      <!-- End Bar CHart -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- #/ container -->
+  </div>
+  {% endblock %}
+</div>

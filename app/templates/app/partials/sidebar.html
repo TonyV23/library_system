@@ -1,0 +1,79 @@
+<div class="nk-sidebar">
+    <div class="nk-nav-scroll">
+        <ul class="metismenu" id="menu">
+            <li class="nav-label">Dashboard</li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa fa-user menu-icon"></i><span class="nav-text">Authors</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'authors_add' %}">New Author</a></li>
+                    <li><a href="{% url 'authors_index' %}">Display Authors</a></li>
+                </ul>
+            </li
+                </ul>
+            </li </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa fa-book menu-icon"></i> <span class="nav-text">Books</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'books_add' %}">New Book</a></li>
+                    <li><a href="{% url 'books_index' %}">Display Books</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa-solid fa-sitemap"></i></fa-solid> <span class="nav-text">Emplacements</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'emplacements_add' %}">New Emplacement</a></li>
+                    <li><a href="{% url 'emplacements_index' %}">Display Emplacements</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa-solid fa-layer-group"></i><span class="nav-text">Books Category</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'categories_add' %}">New Category</a></li>
+                    <li><a href="{% url 'categories_index' %}">Display Categories</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa fa-users menu-icon"></i><span class="nav-text">Borrowers</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'borrowers_add' %}">New Borrower</a></li>
+                    <li><a href="{% url 'borrowers_index' %}">Display Borrowers</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa fa-shopping-cart menu-icon "></i><span class="nav-text">Borrow</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'borrows_add' %}">New Borrow</a></li>
+                    <li><a href="{% url 'borrows_index' %}">Display Borrows</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa-solid fa-print"></i><span class="nav-text">Print</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'print_authors' %}">Authors</a></li>
+                    <li><a href="{% url 'print_categories' %}">Categories</a></li>
+                    <li><a href="{% url 'print_emplacements' %}">Emplacements</a></li>
+                    <li><a href="{% url 'print_books' %}">Books</a></li>
+                    <li><a href="{% url 'print_borrowers' %}">Borrowers</a></li>
+                    <li><a href="{% url 'print_borrows' %}">Borrows</a></li>
+                    <li><a href="{% url 'print_resume' %}">Resume</a></li>
+                   
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

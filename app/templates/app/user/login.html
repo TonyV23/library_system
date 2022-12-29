@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+
+    {% include 'app/partials/head.html' %}
+
+<body class="h-100">
+    
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+
+
+
+    <div class="login-form-bg h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    <div class="form-input-content">
+                        <div class="card login-form mb-0">
+                            <div class="card-body pt-5">
+                                <a class="text-center" href="#"> <h4>Login</h4></a>
+                                {% if messages %} {% for message in messages %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-alert mr-1"></i>{{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                {% endfor %} {% endif %}
+                                <form class="mt-5 mb-5 login-input user" action="" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="text" name="username" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="Enter username...">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                    </div>
+                                    <button class="btn login-form__btn submit w-100">Login</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    {% load static %}
+    <script src="{% static 'app/plugins/common/common.min.js' %}"></script>
+    <script src="{% static 'app/js/custom.min.js' %}"></script>
+    <script src="{% static 'app/js/settings.js' %}"></script>
+    <script src="{% static 'app/js/gleek.js' %}"></script>
+    <script src="{% static 'app/js/styleSwitcher.js' %}"></script>
+</body>
+</html>
+
+
+
+
+
